@@ -15,16 +15,14 @@ var app = new Vue({
       tlStripe: gsap.timeline({ paused: false, delay: 0, repeat: -1, }),
       countDown: 5,
       duration: 5,
-      sequence: 3,
+      sequence: 2,
       elements: gsap.utils.toArray(".content"),
       firstTime: true
     }
   },
   methods: {
     resetTimer() {
-      console.log('reeset')
       this.countDown = this.duration
-
     },
     timer() {
       if (this.countDown > 0) {
@@ -43,46 +41,28 @@ var app = new Vue({
       gsap.fromTo(content, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 1 })
       gsap.fromTo(image, { scale: 1.2, opacity: 0 }, { scale: 1.1, opacity: 1, duration: 1 })
       gsap.to(content, { x: -100, opacity: 0, duration: 0.5, delay: this.duration })
-      gsap.to(image, { scale: 1, opacity: 0, duration: 0.5, delay: this.duration })
-
-    },
-    runAnim() {
-
-      if (!this.firstTime) {
+      gsap.to(image, { scale: 1, opacity: 0, duration: 0.5, delay: this.duration }).then(() => {
         if (this.sequence > 0) {
-          setTimeout(() => {
-            this.sequence -= 1
-            this.animationA()
-            this.runAnim()
-          }, this.duration * 1000)
+          this.sequence--
         } else {
-          this.sequence = Object.keys(this.elements).length
-          this.runAnim()
+          this.sequence = 2
         }
-      } else {
-        this.sequence = 0
         this.animationA()
-        this.firstTime = false
-        setTimeout(() => {
-          this.runAnim()
-        }, this.duration)
-      }
+      })
     }
   },
+ 
   computed: {
     timeFraction() {
       const rawTimeFraction = this.countDown / this.duration;
       return rawTimeFraction * 100
     }
   },
-  watch: {
 
-  },
   mounted() {
     // console.log(Object.keys(this.elements).length)
-
-
-    this.runAnim()
+    
+    this.animationA()
     this.timer()
   }
 })
