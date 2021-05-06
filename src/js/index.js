@@ -14,30 +14,39 @@ var app = new Vue({
       tlImages: gsap.timeline({ paused: false, delay: 0.3, repeat: -1, }),
       tlStripe: gsap.timeline({ paused: false, delay: 0, repeat: -1, }),
       countDown: 5,
-      duration: 5,
+      duration: 8,
       sequence: 2,
       elements: gsap.utils.toArray(".content"),
-      firstTime: true
+      firstTime: true,
+      howMany: 0,
+      progress: 100,
+      completed: false,
+      tempo: 50,
     }
   },
   methods: {
     resetTimer() {
       this.countDown = this.duration
     },
-    timer() {
-      if (this.countDown > 0) {
-        setTimeout(() => {
-          this.countDown -= 1
-          this.timer()
-        }, 1000)
-      } else {
-        this.countDown = this.duration
-        this.timer()
-      }
+
+    timer(tempo) {
+      let setIntervalRef = setInterval( ()=> {
+        this.progress--;
+        if (this.progress == 0) {
+          clearInterval(setIntervalRef);
+          this.completed = true;
+        }
+      }, this.tempo);
     },
-    animationA(i) {
+    restart() {
+      this.completed = false;
+      this.progress = 100;
+      this.timer(this.tempo);
+    },
+    animation(i) {
       var content = '.content-' + this.sequence
       var image = '.backImage-' + this.sequence
+
       gsap.fromTo(content, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 1 })
       gsap.fromTo(image, { scale: 1.2, opacity: 0 }, { scale: 1.1, opacity: 1, duration: 1 })
       gsap.to(content, { x: -100, opacity: 0, duration: 0.5, delay: this.duration })
@@ -45,13 +54,16 @@ var app = new Vue({
         if (this.sequence > 0) {
           this.sequence--
         } else {
-          this.sequence = 2
+          this.sequence = this.howMany
         }
-        this.animationA()
+        this.animation()
+        this.countDown = 5
+        this.restart()
+        
       })
     }
   },
- 
+
   computed: {
     timeFraction() {
       const rawTimeFraction = this.countDown / this.duration;
@@ -60,9 +72,10 @@ var app = new Vue({
   },
 
   mounted() {
-    // console.log(Object.keys(this.elements).length)
-    
-    this.animationA()
-    this.timer()
+    this.tempo = this.duration * 10
+    this.timer(this.tempo)
+    this.howMany = Object.keys(this.elements).length - 1
+    this.animation()
+
   }
 })
