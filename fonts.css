@@ -1,0 +1,24 @@
+@font-face {
+    font-family: "Radikal";
+    src: url("http://localhost:8888/welcome/wp-content/themes/welcomescreen/src/fonts/Radikal-Regular.woff2") format("woff2"), url("/src/font/sRadikal-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Radikal";
+    src: url("http://localhost:8888/welcome/wp-content/themes/welcomescreen/src/fonts/Radikal-Bold.woff2") format("woff2"), url("http://localhost:8888/welcome/wp-content/themes/welcomescreen/src/fonts//Radikal-Bold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Radikal";
+    src: url("http://localhost:8888/welcome/wp-content/themes/welcomescreen/src/fonts/Radikal-Light.woff2") format("woff2"), url("http://localhost:8888/welcome/wp-content/themes/welcomescreen/src/fonts//Radikal-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
