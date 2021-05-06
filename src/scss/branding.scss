@@ -42,9 +42,11 @@ h1{
     background-size: cover;
     background-image: url('http://1.bp.blogspot.com/-7pSfXtUiAtM/UHVthalaVEI/AAAAAAAAAWw/dOs1rTJqnes/s1600/Enchanted+Forrest.jpg');
     z-index: 0;
+    opacity: 0;
 }
 .content{
     position: relative;
+    opacity: 0;
     z-index: 2;
 
 }
