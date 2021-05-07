@@ -2,7 +2,12 @@
 $lightBlue: #5fc4e2;
 $darkBlue: #1a1e43;
 $lightPurle: #323465;
-
+.text-lightBlue{
+    color: $lightBlue;
+}
+.text-lightPurle{
+    color: $lightPurle;
+}
 .main {
     font-family: "Radikal" !important;
     background-color: $lightPurle !important;
@@ -36,14 +41,30 @@ h1 {
     height: 100%;
     width: 50%;
     background-size: cover;
-    background-image: url("http://1.bp.blogspot.com/-7pSfXtUiAtM/UHVthalaVEI/AAAAAAAAAWw/dOs1rTJqnes/s1600/Enchanted+Forrest.jpg");
+    //background-image: url("http://1.bp.blogspot.com/-7pSfXtUiAtM/UHVthalaVEI/AAAAAAAAAWw/dOs1rTJqnes/s1600/Enchanted+Forrest.jpg");
     z-index: 0;
     opacity: 0;
 }
+
+.shape {
+    transform: rotate(45deg);
+    position: absolute;
+    bottom: -113px;
+    right: 379px;
+    height: 132px;
+    width: 0;
+    z-index: 3;    
+}
+
 .content {
     position: relative;
     opacity: 0;
     z-index: 2;
+}
+.r-content{
+    position: relative;
+    opacity: 0;
+    z-index: 4;
 }
 
 .clip {
@@ -54,7 +75,6 @@ h1 {
     height: 100%;
     width: 65%;
     z-index: 1;
-
     background-color: $darkBlue;
 }
 
@@ -62,7 +82,7 @@ footer {
     width: 100%;
     height: 100px;
     position: absolute;
-    z-index: 3;
+    z-index: 100;
     left: 0;
     bottom: 0;
     padding: 0 6rem;

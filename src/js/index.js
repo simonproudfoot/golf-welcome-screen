@@ -14,7 +14,7 @@ var app = new Vue({
       tlImages: gsap.timeline({ paused: false, delay: 0.3, repeat: -1, }),
       tlStripe: gsap.timeline({ paused: false, delay: 0, repeat: -1, }),
       countDown: 5,
-      duration: 8,
+      duration: 3,
       sequence: 0,
       elements: gsap.utils.toArray(".content"),
       howMany: 0,
@@ -47,10 +47,21 @@ var app = new Vue({
 
     animation(i) {
       var content = '.content-' + this.sequence
+      var rightContent = '.r-content-' + this.sequence
       var image = '.backImage-' + this.sequence
+      var shape = '.shape-' + this.sequence
+      
+
       gsap.fromTo(content, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 1 })
+      gsap.fromTo(rightContent, { x: 200, opacity: 0 }, { x: 0, opacity: 1, duration: 1 })
       gsap.fromTo(image, { scale: 1.2, opacity: 0 }, { scale: 1.1, opacity: 1, duration: 1 })
+
+      gsap.fromTo(shape, { width: 0  }, { width: '800px', duration: 0.4 })
+      gsap.to(shape, { width: 0, duration: 0.4, delay: this.duration })
+      
+      gsap.to(rightContent, { x: 200, opacity: 0, duration: 0.5, delay: this.duration })
       gsap.to(content, { x: -100, opacity: 0, duration: 0.5, delay: this.duration })
+      
       gsap.to(image, { scale: 1, opacity: 0, duration: 0.5, delay: this.duration }).then(() => {
         if (this.sequence > 0) {
           this.sequence--
@@ -66,6 +77,8 @@ var app = new Vue({
   },
 
   mounted() {
+    gsap.set(".shape", {transformOrigin:"right"})
+
     this.tempo = this.duration * 10
     this.sequence =  Object.keys(this.elements).length - 1
     this.timer(this.tempo)
